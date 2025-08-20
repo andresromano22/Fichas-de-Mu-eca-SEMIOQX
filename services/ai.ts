@@ -72,10 +72,10 @@ Genera el resumen y análisis preliminar basado en la información anterior.
 
 export const generateAISummary = async (data: ClinicalData): Promise<string> => {
     try {
-        if (!process.env.VITE_GEMINI_API_KEY) {
+        if (!process.env.'VITE_GEMINI_API_KEY') {
             throw new Error("API key not found.");
         }
-        const ai = new GoogleGenAI({ apiKey: process.env.VITE_GEMINI_API_KEY });
+        const ai = new GoogleGenAI({ apiKey: process.env.'VITE_GEMINI_API_KEY' });
         const prompt = formatDataForPrompt(data);
 
         const response = await ai.models.generateContent({
@@ -96,14 +96,14 @@ export const generateAISummary = async (data: ClinicalData): Promise<string> => 
 
 export const interpretRadiograph = async (imageBase64: string, imageType: string): Promise<string> => {
     try {
-        if (!process.env.VITE_GEMINI_API_KEY) {
+        if (!process.env.'VITE_GEMINI_API_KEY') {
             throw new Error("API key not found.");
         }
         if (!imageBase64 || !imageType) {
             return "Error: No se proporcionó imagen para interpretar.";
         }
 
-        const ai = new GoogleGenAI({ apiKey: process.env.VITE_GEMINI_API_KEY });
+        const ai = new GoogleGenAI({ apiKey: process.env.'VITE_GEMINI_API_KEY' });
         
         const base64Data = imageBase64.split(',')[1];
         if (!base64Data) {
@@ -176,9 +176,9 @@ const formatDataForCIFPrompt = (record: ClinicalRecord, patient: Patient): strin
 
 export const generateCIFProfile = async (record: ClinicalRecord, patient: Patient): Promise<CIFProfile | null> => {
     try {
-        if (!process.env.VITE_GEMINI_API_KEY) throw new Error("API key not found.");
+        if (!process.env.'VITE_GEMINI_API_KEY') throw new Error("API key not found.");
         
-        const ai = new GoogleGenAI({ apiKey: process.env.VITE_GEMINI_API_KEY });
+        const ai = new GoogleGenAI({ apiKey: process.env.'VITE_GEMINI_API_KEY' });
 
         const prompt = `
 Actúa como un asistente clínico experto en Kinesiología y en la Clasificación Internacional del Funcionamiento, de la Discapacidad y de la Salud (CIF).
