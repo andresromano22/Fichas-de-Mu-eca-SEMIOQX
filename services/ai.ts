@@ -1,6 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { ClinicalData, ClinicalRecord, Patient, CIFProfile } from "../types";
 
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 const formatDataForPrompt = (data: ClinicalData): string => {
     let prompt = `
 ### INFORME CLÍNICO DE PACIENTE PARA ANÁLISIS PRELIMINAR ###
